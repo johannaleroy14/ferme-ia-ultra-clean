@@ -1,5 +1,16 @@
 services:
   - type: web
+    name: nom-de-ton-service
+    env: python
+    buildCommand: pip install -r requirements.txt
+    startCommand: gunicorn agent:app --bind 0.0.0.0:$PORT
+    plan: free
+    # Forcer la purge du cache en ajoutant un numéro de version à build
+    build:
+      cache:
+        enabled: false
+services:
+  - type: web
     name: ferme-ia-ultra-clean
     env: python
     buildCommand: pip install -r requirements.txt
